@@ -23,11 +23,13 @@ A variável NGINX_PROCESS é usada para definir o valor de worker_processes 1. O
 
 ## Modo de Uso
 
+```shell
 docker run -it -p 80:80 -v /path/to/www:/srv/www \ 
                         -e MAX_PHP_PROCESS=25 \
                         -e NGINX_PROCESS=1 \
                         --cpus="1.0" \
                         --memory="300m" \
                         jarzamendia/wordpress-nginx:latest
+```
 
 A pasta com o conteúdo do Wordpress deve ter as seguintes permissões: nobody:nobody (65534:65534).
