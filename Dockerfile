@@ -24,6 +24,7 @@ VOLUME [ "/srv/www" ]
 EXPOSE 80
 
 ENV MAX_PHP_PROCESS="30"
+ENV NGINX_PROCESS="2"
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
