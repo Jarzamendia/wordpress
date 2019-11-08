@@ -12,6 +12,7 @@ Imagem com PHP-FPM e Nginx usada para publicar o Wordpress.
 ### MAX_PHP_PROCESS
 
 A variável MAX_PHP_PROCESS é usada para definir o valor de pm.max_children. O valor padrão é 50.
+
 Quanto maior o valor desta variável, mais memoria o container usará em momentos de alto acesso. Porém mais acessos simultâneos ele aguentará.
 
 ### NGINX_PROCESS
@@ -21,5 +22,12 @@ A variável NGINX_PROCESS é usada para definir o valor de worker_processes 1. O
 É importante lembrar que caso você utiliza limites de CPU, o valor de NGINX_PROCESS deve segui-lo.
 
 ## Modo de Uso
-docker run -it -p 80:80 -v /path/to/www:/srv/www -e MAX_PHP_PROCESS=25   -e NGINX_PROCESS=1 --cpus="1.0" --memory="300m" jarzamendia/wordpress-nginx:latest
+
+docker run -it -p 80:80 -v /path/to/www:/srv/www \ 
+                        -e MAX_PHP_PROCESS=25 \
+                        -e NGINX_PROCESS=1 \
+                        --cpus="1.0" \
+                        --memory="300m" \
+                        jarzamendia/wordpress-nginx:latest
+
 A pasta com o conteúdo do Wordpress deve ter as seguintes permissões: nobody:nobody (65534:65534).
