@@ -13,7 +13,8 @@ Imagem com PHP-FPM e Nginx usada para publicar o Wordpress.
 
 A variável MAX_PHP_PROCESS é usada para definir o valor de pm.max_children. O valor padrão é 50.
 
-Quanto maior o valor desta variável, mais memoria o container usará em momentos de alto acesso. Porém mais acessos simultâneos ele aguentará.
+Quanto maior o valor desta variável, mais memória o container usará em momentos de alto acesso. Porém mais acessos simultâneos ele aguenta.
+
 
 ### NGINX_PROCESS
 
@@ -33,3 +34,30 @@ docker run -it -p 80:80 -v /path/to/www:/srv/www \
 ```
 
 A pasta com o conteúdo do Wordpress deve ter as seguintes permissões: nobody:nobody (65534:65534).
+
+
+## Criando instalação do zero
+
+Este container, diferente do oficial do Wordpress não configura ou cria uma nova instalação do Wordpress. Para isto, podemos usar o WP CLI. Segue um exemplo:
+
+### Iniciar o container wordpress:cli
+
+$ docker run -it --entrypoint /bin/sh --workdir /srv/www -v wp_dir:/srv/www wordpress:cli
+
+Ex.: docker run -it --entrypoint /bin/sh --workdir /srv/www  -v C:/wp:/srv/www wordpress:cli
+
+### Fazer download dos arquivos do Wordpress
+
+$ wp core download --locale=pt_BR
+
+### Criando o arquivo wp-config.php
+
+$ wp core config --dbhost=DatabaseIP --dbname=wordpress --dbuser=db_user --dbpass=db_password
+
+Ex.: wp core config --dbhost=10.0.0.107 --dbname=wordpress --dbuser=root --dbpass=P@ssw0rd
+
+### Instalando o Wordpress
+
+$ wp core install --url=SITE_URL --title="Your Blog Title" --admin_name=wordpress_admin --admin_password=ADMIN_PASSWORD --admin_email=you@example.com --skip-email
+
+Ex.: wp core install --url=localhost --title="Your Blog Title" --admin_name=wordpress_admin --admin_password=P@ssw0rd --admin_email=you@example.com --skip-email

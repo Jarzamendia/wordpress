@@ -1,0 +1,31 @@
+  
+version: '3'
+
+services:
+
+  wp:
+    image: jarzamendia/wordpress-nginx:latest 
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - /path/to/wordpress:/srv/www
+    environment:
+      MAX_PHP_PROCESS: "5"
+      NGINX_PROCESS: "1"
+
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - /path/to/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    command: [
+        '--default_authentication_plugin=mysql_native_password',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci'
+    ]
+    environment:
+      MYSQL_DATABASE: "wordpress"
+      MYSQL_ROOT_PASSWORD: "P@ssw0rd"
