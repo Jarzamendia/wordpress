@@ -13,12 +13,12 @@ Imagem com PHP-FPM e Nginx usada para publicar o Wordpress.
 
 A variável MAX_PHP_PROCESS é usada para definir o valor de pm.max_children. O valor padrão é 50.
 
-Quanto maior o valor desta variável, mais memória o container usará em momentos de alto acesso. Porém mais acessos simultâneos ele aguenta.
+Quanto maior o valor desta variável, mais memória o container usará em momentos de alto acesso. Porém mais acessos simultâneos ele aguentará.
 
 
 ### NGINX_PROCESS
 
-A variável NGINX_PROCESS é usada para definir o valor de worker_processes 1. O valor padrão é 1. O ideal é 1 por CPU.
+A variável NGINX_PROCESS é usada para definir o valor de worker_processes. O valor padrão é 1. O ideal é 1 por CPU.
 
 É importante lembrar que caso você utiliza limites de CPU, o valor de NGINX_PROCESS deve segui-lo.
 
